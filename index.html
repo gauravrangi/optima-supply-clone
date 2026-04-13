@@ -216,7 +216,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-images { display: none; }
+      /* hero-images mobile: handled by orbit layout above */
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -228,7 +228,103 @@
       .trust-row { gap: 12px; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
     }
-  </style>
+  
+    /* ── HERO SPACING FIX ── */
+    .hero { min-height: unset !important; align-items: flex-start !important; }
+    .hero-inner { padding-top: 48px !important; padding-bottom: 48px !important; }
+
+    /* ── ORBIT SHOWCASE (hero products) ── */
+    .hero-images { display: block !important; position: relative; height: 420px; }
+    .showcase-wrap { position: relative; width: 100%; height: 420px; }
+    .orbit-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .showcase-orbit { position: relative; width: 100%; height: 100%; z-index: 1; }
+    .showcase-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 148px; background: white; border-radius: 22px; padding: 16px; box-shadow: 0 24px 64px rgba(44,144,206,0.22), 0 4px 16px rgba(0,0,0,0.08); border: 1.5px solid rgba(44,144,206,0.15); text-align: center; z-index: 5; animation: floatCenter 4s ease-in-out infinite; }
+    .showcase-glow { position: absolute; inset: -24px; background: radial-gradient(ellipse, rgba(44,144,206,0.14) 0%, transparent 70%); border-radius: 9999px; z-index: -1; animation: pulseGlow 3s ease-in-out infinite; }
+    .showcase-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #2c90ce, #b4529f); color: white; font-size: 9px; font-weight: 700; letter-spacing: 0.07em; padding: 3px 12px; border-radius: 99px; text-transform: uppercase; white-space: nowrap; box-shadow: 0 2px 8px rgba(44,144,206,0.35); }
+    .showcase-center img { width: 100%; border-radius: 12px; object-fit: contain; aspect-ratio: 1/1; background: #f2f5f7; }
+    .showcase-label { margin-top: 10px; font-size: 10.5px; font-weight: 600; color: #1f2937; line-height: 1.4; }
+    .sat { position: absolute; width: 100px; background: white; border-radius: 16px; padding: 10px; box-shadow: 0 6px 24px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.05); text-align: center; z-index: 4; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .sat:hover { box-shadow: 0 16px 48px rgba(44,144,206,0.20); z-index: 10; }
+    .sat img { width: 100%; border-radius: 8px; object-fit: contain; aspect-ratio: 1/1; background: #f2f5f7; }
+    .sat p { font-size: 9px; color: #6b7280; margin-top: 6px; font-weight: 500; line-height: 1.3; }
+    .sat-1 { top: 8px; right: 8px; border: 1px solid rgba(44,144,206,0.13); animation: floatSat1 5s ease-in-out infinite; }
+    .sat-2 { top: 8px; left: 8px; border: 1px solid rgba(180,82,159,0.13); animation: floatSat2 5.5s ease-in-out infinite; }
+    .sat-3 { bottom: 8px; right: 8px; border: 1px solid rgba(44,144,206,0.13); animation: floatSat3 4.5s ease-in-out infinite; }
+    .sat-4 { bottom: 8px; left: 8px; border: 1px solid rgba(180,82,159,0.13); animation: floatSat4 4.8s ease-in-out infinite; }
+    @keyframes floatCenter { 0%,100%{transform:translate(-50%,-50%) translateY(0px)} 50%{transform:translate(-50%,-50%) translateY(-10px)} }
+    @keyframes floatSat1 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-7px)} }
+    @keyframes floatSat2 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-9px)} }
+    @keyframes floatSat3 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-6px)} }
+    @keyframes floatSat4 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-8px)} }
+    @keyframes pulseGlow { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.15)} }
+
+    /* ── MOBILE: orbit layout ── */
+    @media (max-width: 640px) {
+      .hero-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .hero-images { height: auto !important; overflow: visible; }
+      .showcase-wrap { height: auto; }
+      .orbit-svg { display: none; }
+      .showcase-orbit { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; position: static !important; width: 100% !important; height: auto !important; }
+      .showcase-center { position: static !important; transform: none !important; animation: none !important; width: 100% !important; grid-column: span 2; box-sizing: border-box; }
+      .sat { position: static !important; animation: none !important; width: 100% !important; box-sizing: border-box; }
+      .sat-1, .sat-2, .sat-3, .sat-4 { top: auto !important; bottom: auto !important; left: auto !important; right: auto !important; }
+    }
+
+    /* ── BENTO GRID (contents section) ── */
+    .contents-section { padding: 80px 24px !important; background: var(--background); }
+    .bento-inner { max-width: 960px; margin: 0 auto; }
+    .bento-header { margin-bottom: 48px; }
+    .bento-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #2c90ce; background: rgba(44,144,206,0.08); border: 1px solid rgba(44,144,206,0.18); padding: 4px 14px; border-radius: 99px; margin-bottom: 16px; }
+    .bento-title { font-family: var(--font-heading); font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; line-height: 1.15; color: var(--foreground); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .bento-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px; }
+    .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .bento-card { border-radius: 20px; padding: 28px 24px 22px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .bento-card:hover { transform: translateY(-3px); }
+    .bento-wide { grid-column: span 2; }
+    .bento-wide2 { grid-column: span 2; }
+    .bento-tall { grid-row: span 2; }
+    .bento-dark { background: #0f172a; border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+    .bento-dark h3 { color: #f8fafc; }
+    .bento-dark p { color: rgba(255,255,255,0.55); }
+    .bento-dark .bento-num { color: rgba(255,255,255,0.1); }
+    .bento-dark .bento-tag { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.1); }
+    .bento-accent { background: linear-gradient(135deg, #1a3a5c 0%, #0e2a4a 100%); border: 1px solid rgba(44,144,206,0.25); box-shadow: 0 8px 32px rgba(44,144,206,0.15); }
+    .bento-accent h3 { color: #e0f0ff; }
+    .bento-accent p { color: rgba(224,240,255,0.6); }
+    .bento-accent .bento-num { color: rgba(44,144,206,0.2); }
+    .bento-accent .bento-tag { background: rgba(44,144,206,0.15); color: #7dc4f0; border-color: rgba(44,144,206,0.2); }
+    .bento-light { background: white; border: 1px solid rgba(0,0,0,0.07); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .bento-light h3 { color: #0f172a; }
+    .bento-light p { color: #64748b; }
+    .bento-light .bento-num { color: rgba(0,0,0,0.05); }
+    .bento-light .bento-tag { background: rgba(44,144,206,0.07); color: #2c90ce; border-color: rgba(44,144,206,0.15); }
+    .bento-purple { background: linear-gradient(135deg, #1e0a2e 0%, #2d0f47 100%); border: 1px solid rgba(180,82,159,0.25); box-shadow: 0 8px 32px rgba(180,82,159,0.12); }
+    .bento-purple h3 { color: #f5e8ff; }
+    .bento-purple p { color: rgba(245,232,255,0.55); }
+    .bento-purple .bento-num { color: rgba(180,82,159,0.18); }
+    .bento-purple .bento-tag { background: rgba(180,82,159,0.15); color: #e090d0; border-color: rgba(180,82,159,0.2); }
+    .bento-num { position: absolute; top: 16px; right: 20px; font-size: 64px; font-weight: 900; line-height: 1; font-family: var(--font-heading); letter-spacing: -0.04em; pointer-events: none; user-select: none; }
+    .bento-card-body { position: relative; z-index: 1; }
+    .bento-icon-lg { font-size: 28px; margin-bottom: 14px; display: block; line-height: 1; }
+    .bento-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.3; }
+    .bento-card p { font-size: 13.5px; line-height: 1.65; margin: 0; }
+    .bento-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; border: 1px solid; margin-top: 18px; align-self: flex-start; }
+
+    /* ── MOBILE: bento responsive ── */
+    @media (max-width: 720px) {
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .bento-wide, .bento-wide2 { grid-column: span 2; }
+      .bento-tall { grid-row: span 1; }
+      .bento-num { font-size: 44px; }
+    }
+    @media (max-width: 480px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-wide, .bento-wide2 { grid-column: span 1; }
+      .bento-header { margin-bottom: 28px; }
+      .bento-title { font-size: 28px; }
+      .contents-section { padding: 48px 16px !important; }
+    }
+</style>
 </head>
 <body>
 
@@ -324,24 +420,41 @@
 
       <!-- Right: Optima Supply product images -->
       <div class="hero-images" aria-hidden="true">
-        <div class="img-col-top">
-          <div class="img-card">
-            <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/03/OPTI-S_5mg_image.webp" alt="OPTI-(S) 5mg" />
-            <p>OPTI-(S) Semaglutide 5mg</p>
-          </div>
-          <div class="img-card">
-            <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2025/12/BPC-157_5mg_image.webp" alt="BPC-157 5mg" />
-            <p>BPC-157 5mg</p>
-          </div>
-        </div>
-        <div class="img-col-bottom">
-          <div class="img-card">
-            <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/03/OPTI-R_10mg_image.webp" alt="OPTI-(R) 10mg" />
-            <p>OPTI-(R) Retatrutide 10mg</p>
-          </div>
-          <div class="img-card">
-            <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/06/BPC-157_10mg_image.webp" alt="BPC-157 10mg" />
-            <p>BPC-157 10mg</p>
+        <div class="showcase-wrap">
+          <svg class="orbit-svg" viewBox="0 0 440 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="220" cy="210" rx="155" ry="145" stroke="rgba(44,144,206,0.07)" stroke-width="1" stroke-dasharray="5 5"/>
+            <line x1="220" y1="210" x2="355" y2="75" stroke="rgba(44,144,206,0.22)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="220" y1="210" x2="78" y2="90" stroke="rgba(180,82,159,0.22)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="220" y1="210" x2="368" y2="340" stroke="rgba(44,144,206,0.18)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="220" y1="210" x2="66" y2="330" stroke="rgba(180,82,159,0.18)" stroke-width="1" stroke-dasharray="4 4"/>
+            <circle cx="355" cy="75" r="3.5" fill="rgba(44,144,206,0.35)"/>
+            <circle cx="78" cy="90" r="3.5" fill="rgba(180,82,159,0.35)"/>
+            <circle cx="368" cy="340" r="3.5" fill="rgba(44,144,206,0.35)"/>
+            <circle cx="66" cy="330" r="3.5" fill="rgba(180,82,159,0.35)"/>
+          </svg>
+          <div class="showcase-orbit">
+            <div class="showcase-center">
+              <div class="showcase-glow"></div>
+              <div class="showcase-badge">&#11088; Featured</div>
+              <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/03/OPTI-S_5mg_image.webp" alt="OPTI-(S) 5mg" />
+              <div class="showcase-label">OPTI-(S) Semaglutide 5mg</div>
+            </div>
+            <div class="sat sat-1">
+              <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/03/OPTI-R_10mg_image.webp" alt="OPTI-(R) 10mg" />
+              <p>OPTI-(R) Retatrutide 10mg</p>
+            </div>
+            <div class="sat sat-2">
+              <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/06/AOD-9604_5mg_image.webp" alt="AOD-9604 5mg" />
+              <p>AOD-9604 5mg</p>
+            </div>
+            <div class="sat sat-3">
+              <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2024/06/TB-500_10mg_image.webp" alt="TB-500 10mg" />
+              <p>TB-500 10mg</p>
+            </div>
+            <div class="sat sat-4">
+              <img src="https://i0.wp.com/optimasupply.is/wp-content/uploads/2025/12/BPC-157_5mg_image.webp" alt="BPC-157 5mg" />
+              <p>BPC-157 5mg</p>
+            </div>
           </div>
         </div>
       </div>
@@ -383,60 +496,67 @@
 
   <!-- WHAT'S INSIDE -->
   <section class="contents-section">
-    <div class="contents-inner">
-      <h2 class="section-title">What&apos;s Inside the Handbook</h2>
-      <p class="section-sub">A complete reference for serious researchers &mdash; backed by Optima Supply&apos;s commitment to transparency</p>
-
-      <div class="cards-grid">
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 15.5m14.8-.2l.009.003a.75.75 0 01.478.64l.353 3.533a.75.75 0 01-.747.826H4.107a.75.75 0 01-.747-.826l.353-3.533a.75.75 0 01.478-.64l.008-.003"/></svg>
+    <div class="bento-inner">
+      <div class="bento-header">
+        <div class="bento-eyebrow">Inside the Handbook</div>
+        <h2 class="bento-title">Everything a serious<br>researcher needs</h2>
+        <p class="bento-sub">Backed by Optima Supply&#39;s commitment to transparency &#8212; from first principles to field-ready protocols.</p>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card bento-dark bento-wide">
+          <div class="bento-num">01</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x1F9EC;</div>
+            <h3>Peptide Basics</h3>
+            <p>Structure, synthesis methods, and classification of research peptides including GLP-1s and growth hormone secretagogues.</p>
           </div>
-          <h3>Peptide Basics</h3>
-          <p>Structure, synthesis methods, and classification of research peptides including GLP-1s and growth hormone secretagogues.</p>
+          <div class="bento-tag">Foundation</div>
         </div>
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+        <div class="bento-card bento-accent bento-tall">
+          <div class="bento-num">02</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x1F9CA;</div>
+            <h3>Handling &amp; Storage</h3>
+            <p>Temperature requirements, light sensitivity, and proper storage at -20&#xB0;C to preserve peptide integrity and potency.</p>
           </div>
-          <h3>Handling &amp; Storage</h3>
-          <p>Temperature requirements, light sensitivity, and proper storage at -20&deg;C to preserve peptide integrity and potency.</p>
+          <div class="bento-tag">Protocol</div>
         </div>
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3"/></svg>
+        <div class="bento-card bento-light">
+          <div class="bento-num">03</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x1F4A7;</div>
+            <h3>Reconstitution</h3>
+            <p>Step-by-step protocols for reconstituting lyophilized peptides using bacteriostatic water.</p>
           </div>
-          <h3>Reconstitution</h3>
-          <p>Step-by-step protocols for reconstituting lyophilized peptides using bacteriostatic water.</p>
+          <div class="bento-tag">Step-by-Step</div>
         </div>
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        <div class="bento-card bento-purple">
+          <div class="bento-num">04</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x1F4CB;</div>
+            <h3>Reading COAs</h3>
+            <p>How to interpret Optima Supply&#39;s third-party Certificates of Analysis from labs like Janoshik and S&amp;N.</p>
           </div>
-          <h3>Reading COAs</h3>
-          <p>How to interpret Optima Supply&apos;s third-party Certificates of Analysis from labs like Janoshik and S&amp;N.</p>
+          <div class="bento-tag">Verification</div>
         </div>
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"/></svg>
+        <div class="bento-card bento-light bento-wide2">
+          <div class="bento-num">05</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x2696;&#xFE0F;</div>
+            <h3>U.S. Regulations</h3>
+            <p>Legal framework for purchasing and using research peptides in the U.S. &#8212; for research use only.</p>
           </div>
-          <h3>U.S. Regulations</h3>
-          <p>Legal framework for purchasing and using research peptides in the U.S. &mdash; for research use only.</p>
+          <div class="bento-tag">Compliance</div>
         </div>
-
-        <div class="content-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+        <div class="bento-card bento-dark">
+          <div class="bento-num">06</div>
+          <div class="bento-card-body">
+            <div class="bento-icon-lg">&#x1F3C6;</div>
+            <h3>Best Practices</h3>
+            <p>Documentation, dosing calculations, sterility testing, and lab safety guidelines for professional researchers.</p>
           </div>
-          <h3>Best Practices</h3>
-          <p>Documentation, dosing calculations, sterility testing, and lab safety guidelines for professional researchers.</p>
+          <div class="bento-tag">Advanced</div>
         </div>
-
       </div>
     </div>
   </section>
